@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import Card from '../Card/Card'
 import banner from '../../Assets/Images/banner-wallpaper.jpg'
 
@@ -12,17 +13,52 @@ const metrics = [
 
 
 function TrendingMovie() {
+
+  const [movies, setMovies] = useState([]);
+  const [isListed, setIsListed] = useState([]);
+
+   const handleIsLikedWatchList = (id) =>{
+      const newList = [...isListed];
+      newList.push(id);
+      setIsListed(newList);
+   }
+
+   const handleRemoveFromWatchList = (id)=> {
+    const newList = isListed.filter((movieId)=>{
+      return id!==movieId;
+    })
+    //localStorage.setItem('watchList',JSON.stringify(newWatchList));
+    setIsListed(newList);
+   }
+
+  useEffect(() => {
+    axios.get('https://api.themoviedb.org/3/trending/movie/day?api_key=2b1dbea324598f2a439aa6f16c25bb7e').then(function(response){
+      // console.log(response);
+      let movies = response.data.results;
+      
+      setMovies(movies);
+      // console.log('randommovies', randomMovie)
+    }).catch(function(error) {
+      console.error("Error fetching trending movies:", error);
+    });
+
+  },[])
+
     return (
         <>
         <h2 className="text-sky-500 mx-2 font-bold text-2xl text-center py-2">Trending Movies</h2>
-        <div className="flex flex-wrap justify-center p-6 bg-gray-100 ">
-          {metrics.map((metric, index) => (
+        <div className="flex flex-wrap justify-around bg-gray-100 gap-8">
+          {movies.map((movieObj, index) => (
             <Card
-              key = {index}
-              title = {metric.title}
-              value = {metric.value}
-              icon = {metric.icon}
-              imageUrl = {metric.imageUrl}
+              key = {movieObj.id}
+              id = {movieObj.id}
+              title = {movieObj.title}
+              value = {movieObj.value}
+              icon = {movieObj.icon}
+              poster_path={movieObj.poster_path}
+              handleIsLikedWatchList = {handleIsLikedWatchList}
+              handleRemoveFromWatchList = {handleRemoveFromWatchList}
+              isListed={isListed}
             />
           ))}
         </div>

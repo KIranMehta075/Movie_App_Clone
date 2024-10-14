@@ -1,28 +1,72 @@
-import React from 'react';
+import React from "react";
+
+// const Card = ({ id, title, poster_path, isListed, handleIsLikedWatchList, handleRemoveFromWatchList }) => {
+//   return (
+//     <>
+//      <div
+//       className="relative h-[40vh] shadow-md rounded-xl overflow-hidden bg-cover bg-no-repeat m-2 w-56 transition-transform duration-300 ease-in-out transform hover:scale-110 flex flex-col justify-end"
+//       style={{
+//         backgroundImage: `url(https://image.tmdb.org/t/p/original${poster_path})`,
+//       }}
+//     >
+      
+//       {isListed.includes(id) ? (
+//         <div
+//           onClick={() => handleRemoveFromWatchList(id)}
+//           className="absolute top-2 right-2 text-xl rounded-lg cursor-pointer p-2 bg-slate-950/50"
+//         >
+//           &#10060;
+//         </div>
+//       ) : (
+//         <div
+//           onClick={() => handleIsLikedWatchList(id)}
+//           className="absolute top-2 right-2 text-xl rounded-lg cursor-pointer p-1 bg-slate-950/50"
+//         >
+//           &#128525;
+//         </div>
+//       )}
+//         <div className=" w-full text-xl bg-gray-900/60 text-white text-center  p-2">
+//           {title}
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
 
 
-const Card = ({ title, value, icon, imageUrl }) => {
+
+const Card = ({ id, title, poster_path, isListed, handleIsLikedWatchList, handleRemoveFromWatchList }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden m-2 w-64">
-      <div className="relative">
-        <img src={imageUrl} alt={title} className="w-full h-48 object-cover" />
-        <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2">
-          {title}
-        </div>
+    <div
+      className="h-[40vh] shadow-md rounded-xl overflow-hidden bg-cover bg-no-repeat m-2 w-56 transition-transform duration-300 ease-in-out transform hover:scale-110 flex flex-col"
+      style={{
+        backgroundImage: `url(https://image.tmdb.org/t/p/original${poster_path})`,
+      }}
+    >
+      <div className="flex justify-end p-2">
+        {isListed.includes(id) ? (
+          <div
+            onClick={() => handleRemoveFromWatchList(id)}
+            className="text-l rounded-lg cursor-pointer p-2 bg-slate-950/50"
+          >
+            &#10060;
+          </div>
+        ) : (
+          <div
+            onClick={() => handleIsLikedWatchList(id)}
+            className="text-xl rounded-lg cursor-pointer p-1 bg-slate-950/50"
+          >
+            &#128525;
+          </div>
+        )}
       </div>
-      {/* <div className="p-4">
-        <div className="flex items-center">
-          <div className="text-4xl text-blue-500">
-            {icon}
-          </div>
-          <div className="ml-4">
-            <p className="text-gray-700">{value}</p>
-          </div>
-        </div>
-      </div> */}
+      <div className="flex-grow"></div>
+      <div className="w-full text-xl bg-gray-900/60 text-white text-center p-2">
+        {title}
+      </div>
     </div>
   );
 };
 
-export default Card;
 
+export default Card;
