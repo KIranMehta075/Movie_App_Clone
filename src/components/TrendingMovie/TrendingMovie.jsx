@@ -16,6 +16,7 @@ function TrendingMovie() {
    const handleIsLikedWatchList = (id) =>{
       const newList = [...isListed];
       newList.push(id);
+      localStorage.setItem('watchList',JSON.stringify(newList));
       setIsListed(newList);
   }
 
@@ -23,7 +24,7 @@ function TrendingMovie() {
     const newList = isListed.filter((movieId)=>{
       return id!==movieId;
     })
-    //localStorage.setItem('watchList',JSON.stringify(newWatchList));
+    localStorage.setItem('watchList',JSON.stringify(newList));
     setIsListed(newList);
   }
 
@@ -35,6 +36,15 @@ function TrendingMovie() {
     if(pageno > 1){
     setPageNo(pageno - 1);}
   }
+
+  useEffect(() => {
+    let watchListFromLocalStorage = JSON.parse(localStorage.getItem('watchList'));
+    if (!watchListFromLocalStorage) {
+      watchListFromLocalStorage = []; // Set to an empty array if null
+    }
+    setIsListed(watchListFromLocalStorage);
+  }, []);
+  
 
   useEffect(() => {
     axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=2b1dbea324598f2a439aa6f16c25bb7e&page=${pageno}`).then(function(response){
