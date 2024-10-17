@@ -1,7 +1,7 @@
 // 1. make pagination function/ component
 // 2. need right left arrow with initial state
-// import in trending js
-// should be stick at bottom of the page
+// 3. import in trending js
+// 4. should be stick at bottom of the page
 
 import React from 'react'
 

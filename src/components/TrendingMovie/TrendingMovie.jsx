@@ -5,12 +5,6 @@ import banner from '../../Assets/Images/banner-wallpaper.jpg'
 import { Pagination } from '../Pagination/Pagination';
 
 
-const metrics = [
-    { title: 'Movie 1', value: 'Rating: 8.2',  imageUrl: banner },
-    { title: 'Movie 2', value: 'Rating: 7.5',  imageUrl: banner },
-    { title: 'Movie 3', value: 'Rating: 9.0',  imageUrl: banner },
-    { title: 'Movie 4', value: 'Rating: 6.8', imageUrl: banner },
-  ];
 
 
 function TrendingMovie() {

@@ -47,7 +47,7 @@ const Card = ({ id, title, poster_path, isListed, handleIsLikedWatchList, handle
         {isListed.includes(id) ? (
           <div
             onClick={() => handleRemoveFromWatchList(id)}
-            className="text-l rounded-lg cursor-pointer p-2 bg-slate-950/50"
+            className="text-xl rounded-lg cursor-pointer p-2 bg-slate-950/50"
           >
             &#10060;
           </div>
@@ -67,6 +67,7 @@ const Card = ({ id, title, poster_path, isListed, handleIsLikedWatchList, handle
     </div>
   );
 };
+
 
 
 export default Card;
