@@ -7,27 +7,11 @@ import { Pagination } from '../Pagination/Pagination';
 
 
 
-function TrendingMovie() {
+function TrendingMovie({isListed, setIsListed, handleIsLikedWatchList, handleRemoveFromWatchList}) {
 
   const [movies, setMovies] = useState([]);
-  const [isListed, setIsListed] = useState([]);
   const [pageno, setPageNo] = useState(1);
-
-   const handleIsLikedWatchList = (id) =>{
-      const newList = [...isListed];
-      newList.push(id);
-      localStorage.setItem('watchList',JSON.stringify(newList));
-      setIsListed(newList);
-  }
-
-   const handleRemoveFromWatchList = (id)=> {
-    const newList = isListed.filter((movieId)=>{
-      return id!==movieId;
-    })
-    localStorage.setItem('watchList',JSON.stringify(newList));
-    setIsListed(newList);
-  }
-
+  
   const handleNextPage = () => {
     setPageNo(pageno + 1);
   }
@@ -66,7 +50,7 @@ function TrendingMovie() {
           {movies.map((movieObj, index) => (
             <Card
               key = {movieObj.id}
-              id = {movieObj.id}
+              movieObj = {movieObj}
               title = {movieObj.title}
               value = {movieObj.value}
               icon = {movieObj.icon}

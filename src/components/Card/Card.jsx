@@ -35,7 +35,21 @@ import React from "react";
 
 
 
-const Card = ({ id, title, poster_path, isListed, handleIsLikedWatchList, handleRemoveFromWatchList }) => {
+const Card = ({ id, title, poster_path, isListed, handleIsLikedWatchList, handleRemoveFromWatchList, movieObj }) => {
+  
+//   function isContain(movieObj) {
+//     return isListed.some(movie => movie.id === movieObj.id);
+// }
+
+function isContain(movieObj){
+  for(let i=0;i<isListed.length;i++){
+      if(movieObj.id === isListed[i].id){
+          return true;
+      }
+  }
+  return false;
+}
+
   return (
     <div
       className="h-[40vh] shadow-md rounded-xl overflow-hidden bg-cover bg-no-repeat m-2 w-56 transition-transform duration-300 ease-in-out transform hover:scale-110 flex flex-col"
@@ -44,16 +58,16 @@ const Card = ({ id, title, poster_path, isListed, handleIsLikedWatchList, handle
       }}
     >
       <div className="flex justify-end p-2">
-        {isListed.includes(id) ? (
+        {isContain(movieObj)? (
           <div
-            onClick={() => handleRemoveFromWatchList(id)}
+            onClick={() => handleRemoveFromWatchList(movieObj)}
             className="text-xl rounded-lg cursor-pointer p-2 bg-slate-950/50"
           >
             &#10060;
           </div>
         ) : (
           <div
-            onClick={() => handleIsLikedWatchList(id)}
+            onClick={() => handleIsLikedWatchList(movieObj)}
             className="text-xl rounded-lg cursor-pointer p-1 bg-slate-950/50"
           >
             &#128525;
